@@ -142,10 +142,13 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
         .append("div")
         // .attr("class", "d3-tip");
         .classed("d3-tip", true)
-    
-    circlesGroup.on("mouseover", function(d) {
+        .style("display", "none")
+        console.log("tooltip test")
+
+    d3.selectAll("#circleTooltip")     
+        .on("mouseover", function(d) {
         toolTip.style("display", "block")
-            .html(`${d.state}<br>${xLabel}: ${d[chosenXAxis]}<br>${yLabel}: ${d[chosenYAxis]}`)
+        toolTip.html(`<strong>${d.state}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`)
                 .style("left", d3.event.pageX + "px")
                 .style("top", d3.event.pageY + "px");
     })    
@@ -209,22 +212,24 @@ d3.csv("assets/data/data.csv").then(function(journData, err){
     var circlesGroup = chartGroup.selectAll("circle")
         .data(journData)
         .enter()
-        .append("g");
+        .append("g")
+        .attr("id", "circleTooltip");
     
     var circles = circlesGroup.append("circle")
+        
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
         .attr("r", 15)
         .attr("opacity", ".5")
         .classed("stateCircle", true);
 
-        console.log('test')
+        // console.log('test')
     
     // Append the text inside the circles
     var circlesText = circlesGroup.append("text")
         .text(d => d.abbr)
         .attr("dx", d => xLinearScale(d[chosenXAxis]))
-        .attr("dy", d => yLinearScale(d[chosenYAxis]))
+        .attr("dy", d => yLinearScale(d[chosenYAxis])+5)
         .classed("stateText", true);
     
     // Create group for x-axis labels
