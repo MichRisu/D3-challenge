@@ -11,7 +11,7 @@ function makeResponsive() {
     }
 
     // Create svg wrapper dimension by the current size of browser window
-    var svgWidth = window.innerWidth;
+    var svgWidth = window.innerWidth/1.25;
     var svgHeight = window.innerHeight;
 
     // Set up the margins
@@ -100,7 +100,7 @@ function makeResponsive() {
         circlesGroup.transition()
         .duration(1000)
         .attr("cy", d => newYScale(d[chosenYAxis]))
-        .attr("dy", d => newYScale(d[chosenYAxis]))
+        .attr("dy", d => newYScale(d[chosenYAxis])+5)
     
         return circlesGroup;
     }
@@ -118,7 +118,7 @@ function makeResponsive() {
 
         circlesGroup.transition()
         .duration(1000)
-        .attr("dy", d => newYScale(d[chosenYAxis]))
+        .attr("dy", d => newYScale(d[chosenYAxis])+5)
     
         return circlesGroup;
     }
@@ -151,7 +151,6 @@ function makeResponsive() {
 
         var toolTip = d3.select("body")
             .append("div")
-            // .attr("class", "d3-tip");
             .classed("d3-tip", true)
             .style("display", "none")
             console.log("tooltip test")
@@ -166,23 +165,6 @@ function makeResponsive() {
             .on("mouseout", function() {
                 toolTip.style("display", "none");
             });
-        // var toolTip = d3.tip()
-        //     .attr("class", "d3-tip")
-        //     .offset([80, -60])
-        //     .html(function(d) {
-        //         return (`${d.state}<br>${xLabel}: ${d[chosenXAxis]}<br>${yLabel}: ${d[chosenYAxis]}`);
-        //     });
-        
-        // circlesGroup.call(toolTip);
-
-        // circlesGroup.on("mouseover", function(data) {
-        //     toolTip.show(data);
-        // })
-        //     // On mouseout event
-        //     .on("mouseout", function(data, index) {
-        //         toolTip.hide(data);
-        //     });
-        // return circlesGroup;
     }
 
     // Retrieve data from the CSV file and execute the functions
