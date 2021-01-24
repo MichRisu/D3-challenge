@@ -22,4 +22,5 @@ _______________________________
 
 
 
-*Please click here *
+*Please note *
+  python -m http.server is used to run the visualization. This hosts the page at localhost:8000 in web browser
